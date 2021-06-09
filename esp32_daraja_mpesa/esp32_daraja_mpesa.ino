@@ -10,7 +10,6 @@ extern "C" {
 
 
 WiFiMulti wifiMulti;
-
 ESP32Time rtc;
 
 char * WIFI_SSID = "__ssid__";
@@ -147,12 +146,7 @@ String getAccessToken() {
 void stkPush(String token, String number, String amount) {
 
   String timestamp = rtc.getTime("%Y%m%d%H%M%S");
-
-
   String password = encoder(business_code + pass_key + timestamp);
-
-
-
   String json = "{\"BusinessShortCode\":\"" + business_code + "\",\"Password\":\"" + password + "\",\"Timestamp\":\"" + timestamp + "\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":\"" + amount + "\",\"PartyA\":\"" + number + "\",\"PartyB\":\"" + business_code + "\",\"PhoneNumber\":\"" + number + "\",\"CallBackURL\":\"http://www.biego.tech/\",\"AccountReference\":\"ESP32\",\"TransactionDesc\":\"stktest\"}";
 
   HTTPClient http;
